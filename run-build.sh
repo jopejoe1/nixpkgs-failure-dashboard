@@ -9,7 +9,7 @@ INPUT_FILE="$1"
 NIXPKGS_PATH="$2"
 
 JOBS=$(nproc)
-TIMEOUT="${3:-30}"
+TIMEOUT="${3:-30000000000000}"
 BATCH_SIZE="${4:-5000}"
 LOG_DIR="$RUNTIME_DIR/build-logs"
 
@@ -31,6 +31,7 @@ build_package() {
       --max-jobs 1 \
       --cores 1 \
       --no-link \
+      --builders '' \
       2>&1 | tee "$out_log"
 
   status=${PIPESTATUS[0]}
